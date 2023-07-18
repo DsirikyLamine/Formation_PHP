@@ -15,7 +15,7 @@ function display_recipe(array $recipe) : string
     return $recipe_content;
 }
 
-function display_author(string $authorEmail, array $users) : string
+function displayAuthor(string $authorEmail, array $users) : string
 {
     for ($i = 0; $i < count($users); $i++) {
         $author = $users[$i];
@@ -25,19 +25,13 @@ function display_author(string $authorEmail, array $users) : string
     }
 }
 
-function get_recipes(array $recipes, int $limit) : array
+function getRecipes(array $recipes) : array
 {
     $valid_recipes = [];
-    $counter = 0;
 
     foreach($recipes as $recipe) {
-        if ($counter == $limit) {
-            return $valid_recipes;
-        }
-
         if ($recipe['is_enabled']) {
             $valid_recipes[] = $recipe;
-            $counter++;
         }
     }
 

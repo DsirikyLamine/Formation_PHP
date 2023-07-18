@@ -35,16 +35,10 @@ if (isset($postData['email']) &&  isset($postData['password'])) {
     }
 }
 
-// Si le cookie est présent
-if (isset($_COOKIE['LOGGED_USER'])) {
+// Si le cookie ou la session sont présentes
+if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
     $loggedUser = [
-        'email' => $_COOKIE['LOGGED_USER'],
-    ];
-}
-
-if (isset($_SESSION['LOGGED_USER'])) {
-    $loggedUser = [
-        'email' => $_SESSION['LOGGED_USER'],
+        'email' => $_COOKIE['LOGGED_USER'] ?? $_SESSION['LOGGED_USER'],
     ];
 }
 ?>
@@ -58,7 +52,7 @@ if (isset($_SESSION['LOGGED_USER'])) {
     <?php endif; ?>
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" aria-describedby="email-help" placeholder="junior@exemple.com">
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="email-help" placeholder="you@exemple.com">
         <div id="email-help" class="form-text">L'email utilisé lors de la création de compte.</div>
     </div>
     <div class="mb-3">
