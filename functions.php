@@ -15,7 +15,7 @@ function display_recipe(array $recipe) : string
     return $recipe_content;
 }
 
-function displayAuthor(string $authorEmail, array $users) : string
+function display_author(string $authorEmail, array $users) : string
 {
     for ($i = 0; $i < count($users); $i++) {
         $author = $users[$i];
@@ -23,16 +23,46 @@ function displayAuthor(string $authorEmail, array $users) : string
             return $author['full_name'] . '(' . $author['age'] . ' ans)';
         }
     }
+
+    return 'Non trouvé.';
 }
 
-function getRecipes(array $recipes) : array
+function display_user(int $userId, array $users) : string
+{
+    for ($i = 0; $i < count($users); $i++) {
+        $user = $users[$i];
+        if ($userId === (int) $user['user_id']) {
+            return $user['full_name'] . '(' . $user['age'] . ' ans)';
+        }
+    }
+
+    return 'Non trouvé.';
+}
+
+function retrieve_id_from_user_mail(string $userEmail, array $users) : int
+{
+    for ($i = 0; $i < count($users); $i++) {
+        $user = $users[$i];
+        if ($userEmail === $user['email']) {
+            return $user['user_id'];
+        }
+    }
+
+    return 0;
+}
+
+function get_recipes(array $recipes, int $limit) : array
 {
     $valid_recipes = [];
+    $counter = 0;
 
     foreach($recipes as $recipe) {
-        if ($recipe['is_enabled']) {
-            $valid_recipes[] = $recipe;
+        if ($counter == $limit) {
+            return $valid_recipes;
         }
+
+        $valid_recipes[] = $recipe;
+        $counter++;
     }
 
     return $valid_recipes;
