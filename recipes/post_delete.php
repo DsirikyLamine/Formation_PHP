@@ -20,5 +20,5 @@ $deleteRecipeStatement->execute([
     'id' => $id,
 ]);
 
-header('Location: '.$rootUrl.'index.php');
+header('Location: '.$rootUrl.'home.php');
 ?>

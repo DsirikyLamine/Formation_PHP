@@ -19,6 +19,7 @@ if (
 $title = $postData['title'];
 $recipe = $postData['recipe'];
 
+// Faire l'insertion en base
 $insertRecipe = $mysqlClient->prepare('INSERT INTO recipes(title, recipe, author, is_enabled) VALUES (:title, :recipe, :author, :is_enabled)');
 $insertRecipe->execute([
     'title' => $title,
@@ -26,6 +27,7 @@ $insertRecipe->execute([
     'author' => $loggedUser['email'],
     'is_enabled' => 1,
 ]);
+
 
 ?>
 
